@@ -1,0 +1,695 @@
+{
+  "code_name": "deco_scanner",
+  "unique_prefix": "DECODS",
+  "plugin_type": "device_scanner",
+  "execution_order" : "Layer_3",
+  "enabled": true,
+  "data_source": "script",
+  "data_filters": [
+    {
+      "compare_column": "Object_PrimaryID",
+      "compare_operator": "==",
+      "compare_field_id": "txtMacFilter",
+      "compare_js_template": "'{value}'.toString()",
+      "compare_use_quotes": true
+    }
+  ],
+  "show_ui": true,
+  "localized": ["display_name", "description", "icon"],
+  "mapped_to_table": "CurrentScan",
+  "display_name": [
+    {
+      "language_code": "en_us",
+      "string": "DECO Clients (Device import)"
+    },
+    {
+      "language_code": "de_de",
+      "string": "DECO Clients (Geräteimport)"
+    }
+  ],
+  "icon": [
+    {
+      "language_code": "en_us",
+      "string": "<i class=\"fa-solid fa-hourglass-half\"></i>"
+    },
+    {
+      "language_code": "de_de",
+      "string": "<i class=\"fa-solid fa-hourglass-half\"></i>"
+    }
+  ],
+  "description": [
+    {
+      "language_code": "en_us",
+      "string": "This plugin is to import clients from the Deco network."
+    },
+    {
+      "language_code": "de_de",
+      "string": "Ein Plugin zum Importieren von Geräten aus dem DECO Netzwerk."
+    }
+  ],
+  "params": [
+    {
+      "name": "username",
+      "type": "setting",
+      "value": "DECODS_username"
+    },
+    {
+      "name": "password",
+      "type": "setting",
+      "value": "DECODS_password"
+    },
+    {
+      "name": "host",
+      "type": "setting",
+      "value": "DECODS_host"
+    }
+  ],
+  "database_column_definitions": [
+    {
+      "column": "Index",
+      "css_classes": "col-sm-2",
+      "show": false,
+      "type": "label",
+      "default_value": "",
+      "options": [],
+      "localized": ["name"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "N/A"
+        },
+        {
+          "language_code": "de_de",
+          "string": "N/A"
+        }
+      ]
+    },
+    {
+      "column": "Plugin",
+      "css_classes": "col-sm-2",
+      "show": false,
+      "type": "label",
+      "default_value": "",
+      "options": [],
+      "localized": ["name"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "N/A"
+        },
+        {
+          "language_code": "de_de",
+          "string": "N/A"
+        }
+      ]
+    },
+    {
+      "column": "Object_PrimaryID",
+      "mapped_to_column": "cur_MAC",
+      "css_classes": "col-sm-2",
+      "show": true,
+      "type": "device_mac",
+      "default_value": "",
+      "options": [],
+      "localized": ["name"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "MAC address"
+        },
+        {
+          "language_code": "de_de",
+          "string": "MAC-Adresse"
+        }
+      ]
+    },
+    {
+      "column": "Object_SecondaryID",
+      "mapped_to_column": "cur_IP",
+      "css_classes": "col-sm-2",
+      "show": true,
+      "type": "device_ip",
+      "default_value": "",
+      "options": [],
+      "localized": ["name"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "IP"
+        },
+        {
+          "language_code": "de_de",
+          "string": "IP"
+        }
+      ]
+    },
+    {
+      "column": "DateTimeCreated",
+      "css_classes": "col-sm-2",
+      "show": true,
+      "type": "label",
+      "default_value": "",
+      "options": [],
+      "localized": ["name"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "Created"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Erstellt"
+        }
+      ]
+    },
+    {
+      "column": "DateTimeChanged",
+      "mapped_to_column": "cur_DateTime",
+      "css_classes": "col-sm-2",
+      "show": true,
+      "type": "label",
+      "default_value": "",
+      "options": [],
+      "localized": ["name"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "Changed"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Geändert"
+        }
+      ]
+    },
+    {
+      "column": "Watched_Value1",
+      "css_classes": "col-sm-2",
+      "show": true,
+      "type": "label",
+      "default_value": "",
+      "options": [],
+      "localized": ["name"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "Is active"
+        },,
+        {
+          "language_code": "de_de",
+          "string": "Ist aktiv"
+        }
+      ]
+    },
+    {
+      "column": "Watched_Value2",
+      "mapped_to_column": "cur_Name",
+      "css_classes": "col-sm-2",
+      "show": true,
+      "type": "label",
+      "default_value": "",
+      "options": [],
+      "localized": ["name"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "Hostname"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Hostname"
+        }
+      ]
+    },
+    {
+      "column": "Watched_Value3",
+      "css_classes": "col-sm-2",
+      "show": true,
+      "type": "label",
+      "default_value": "",
+      "options": [],
+      "localized": ["name"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "Hardware"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Hardware"
+        }
+      ]
+    },
+    {
+      "column": "Watched_Value4",
+      "css_classes": "col-sm-2",
+      "show": true,
+      "type": "label",
+      "default_value": "",
+      "options": [],
+      "localized": ["name"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "State"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Zustand"
+        }
+      ]
+    },
+    {
+      "column": "UserData",
+      "css_classes": "col-sm-2",
+      "show": false,
+      "type": "textbox_save",
+      "default_value": "",
+      "options": [],
+      "localized": ["name"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "Comments"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Kommentare"
+        }
+      ]
+    },
+    {
+      "column": "Extra",
+      "css_classes": "col-sm-3",
+      "show": true,
+      "type": "label",
+      "default_value": "",
+      "options": [],
+      "localized": ["name"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "DHCP leases file"
+        },
+        {
+          "language_code": "de_de",
+          "string": "DHCP Leases Datei"
+        }
+      ]
+    },
+    {
+      "column": "ScanMethod",
+      "mapped_to_column": "cur_ScanMethod",
+      "mapped_to_column_data": {
+        "value": "DECODS"
+      },
+      "css_classes": "col-sm-2",
+      "show": true,
+      "type": "label",
+      "default_value": "",
+      "options": [],
+      "localized": ["name"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "Scan method"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Scanmethode"
+        }
+      ]
+    },
+    {
+      "column": "Status",
+      "css_classes": "col-sm-1",
+      "show": true,
+      "type": "replace",
+      "default_value": "",
+      "options": [
+        {
+          "equals": "watched-not-changed",
+          "replacement": "<div style='text-align:center'><i class='fa-solid fa-square-check'></i><div></div>"
+        },
+        {
+          "equals": "watched-changed",
+          "replacement": "<div style='text-align:center'><i class='fa-solid fa-triangle-exclamation'></i></div>"
+        },
+        {
+          "equals": "new",
+          "replacement": "<div style='text-align:center'><i class='fa-solid fa-circle-plus'></i></div>"
+        },
+        {
+          "equals": "missing-in-last-scan",
+          "replacement": "<div style='text-align:center'><i class='fa-solid fa-question'></i></div>"
+        }
+      ],
+      "localized": ["name"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "Status"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Status"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "function": "RUN",
+      "events": ["run"],
+      "type": {
+        "dataType": "string",
+        "elements": [
+          { "elementType": "select", "elementOptions": [], "transformers": [] }
+        ]
+      },
+      "default_value": "disabled",
+      "options": [
+        "disabled",
+        "once",
+        "schedule",
+        "always_after_scan",
+        "on_new_device"
+      ],
+      "localized": ["name", "description"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "When to run"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Wann ausführen"
+        }
+      ],
+      "description": [
+        {
+          "language_code": "en_us",
+          "string": "Enable import of devices from the <code>DECO network</code>. If you select <code>schedule</code> the scheduling settings from below are applied. If you select <code>once</code> the scan is run only once on start of the application (container) or after you update your settings. ⚠ Use the same schedule if you have multiple <i class=\"fa-solid fa-magnifying-glass-plus\"></i> Device scanners enabled."
+        },
+        {
+          "language_code": "de_de",
+          "string": "Aktiviere den Import von einem <code>DECO Netzwerk</code>. Wenn <code>schedule</code> ausgewählt ist, werden die unten gesetzten Zeitplan-Einstellungen verwendet. Ist <code>once</code> ausgewählt, so wird bei jedem Start der Applikation (Container) und nach jedem Speichern der Einstellungen der Imnport durchgeführt."
+        }
+      ]
+    },
+    {
+      "function": "CMD",
+      "type": {
+        "dataType": "string",
+        "elements": [
+          { "elementType": "input", "elementOptions": [], "transformers": [] }
+        ]
+      },
+      "default_value": "python3 /app/front/plugins/deco_network/script.py username={username} password={password} host={decohost}",
+      "options": [],
+      "localized": ["name", "description"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "Command"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Befehl"
+        }
+      ],
+      "description": [
+        {
+          "language_code": "en_us",
+          "string": "Command to run"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Auszuführender Befehl"
+        }
+      ]
+    },
+    {
+      "function": "username",
+      "type": {
+        "dataType": "string",
+        "elements": [
+          {
+            "elementType": "input",
+            "elementOptions": [],
+            "transformers": []
+          }
+        ]
+      },
+      "default_value": "admin username",
+      "options": [],
+      "localized": ["name", "description"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "DECO admin Username"
+        },
+        {
+          "language_code": "de_de",
+          "string": "DECO Admin Benutzername"
+        }
+      ],
+      "description": [
+        {
+          "language_code": "en_us",
+          "string": "DECO administrator user name to log into DECO network. MUST be the main admin account."
+        },
+        {
+          "language_code": "de_de",
+          "string": "DECO Administrator Benutzername fuer das DECO Netzwerk. MUSS der Haupt Administrator sein."
+        }
+      ]
+    },
+    {
+        "function": "password",
+        "type": {
+            "dataType": "string",
+            "elements": [
+                {
+                    "elementType": "input",
+                    "elementOptions": [],
+                    "transformers": []
+                }
+            ]
+        },
+        "default_value": "admin password",
+        "options": [],
+        "localized": ["name", "description"],
+        "name": [
+            {
+                "language_code": "en_us",
+                "string": "DECO admin password"
+            },
+            {
+                "language_code": "de_de",
+                "string": "DECO Admin Passwort"
+            }
+        ],
+        "description": [
+            {
+                "language_code": "en_us",
+                "string": "DECO administrator password to log into DECO network."
+            },
+            {
+                "language_code": "de_de",
+                "string": "DECO Administrator Passwort fuer das DECO Netzwerk."
+            }
+        ]
+    },
+    {
+        "function": "host",
+        "type": {
+            "dataType": "string",
+            "elements": [
+                {
+                    "elementType": "input",
+                    "elementOptions": [],
+                    "transformers": []
+                }
+            ]
+        },
+        "default_value": "192.168.1.254",
+        "options": [],
+        "localized": ["name", "description"],
+        "name": [
+            {
+                "language_code": "en_us",
+                "string": "DECO host IP"
+            },
+            {
+                "language_code": "de_de",
+                "string": "DECO Geraete IP"
+            }
+        ],
+        "description": [
+            {
+                "language_code": "en_us",
+                "string": "IP of the main DECO"
+            },
+            {
+                "language_code": "de_de",
+                "string": "IP Adresse des Haupt DECO Geraetes"
+            }
+        ]
+    },
+    {
+      "function": "RUN_SCHD",
+      "type": {
+        "dataType": "string",
+        "elements": [
+          { "elementType": "input", "elementOptions": [], "transformers": [] }
+        ]
+      },
+      "default_value": "0 2 * * *",
+      "options": [],
+      "localized": ["name", "description"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "Schedule"
+        },
+        {
+          "language_code": "es_es",
+          "string": "Schedule"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Zeitplan"
+        }
+      ],
+      "description": [
+        {
+          "language_code": "en_us",
+          "string": "Only enabled if you select <code>schedule</code> in the <a href=\"#DHCPLSS_RUN\"><code>DHCPLSS_RUN</code> setting</a>. Make sure you enter the schedule in the correct cron-like format (e.g. validate at <a href=\"https://crontab.guru/\" target=\"_blank\">crontab.guru</a>). For example entering <code>0 4 * * *</code> will run the scan after 4 am in the <a onclick=\"toggleAllSettings()\" href=\"#TIMEZONE\"><code>TIMEZONE</code> you set above</a>. Will be run NEXT time the time passes. <br/> It's recommended to use the same schedule interval for all plugins responsible for discovering new devices."
+        },
+        {
+          "language_code": "de_de",
+          "string": "Nur aktiv, wenn <code>schedule</code> in der <a href=\"#INTRNT_RUN\"><code>INTRNT_RUN</code>Einstellung</a> ausgewählt wurde. Sichergehen, dass das Intervall in einem korrekten cron-ähnlichen Format angegeben wurde (z.B. auf <a href=\"https://crontab.guru/\" target=\"_blank\">crontab.guru</a> testen). <code>0 4 * * *</code> würde den Scan täglich um 4 Uhr in der <a onclick=\"toggleAllSettings()\" href=\"#TIMEZONE\">oben ausgewählten <code>TIMEZONE</code></a> starten. Wird erst beim NÄCHSTEN Intervall ausgeführt. <br/>Es wird empfohlen, das Intervall aller Plugins, welche nach neuen Geräten suchen, auf den gleichen Wert zu setzen."
+        }
+      ]
+    },
+    {
+      "function": "RUN_TIMEOUT",
+      "type": {
+        "dataType": "integer",
+        "elements": [
+          {
+            "elementType": "input",
+            "elementOptions": [{ "type": "number" }],
+            "transformers": []
+          }
+        ]
+      },
+      "default_value": 5,
+      "options": [],
+      "localized": ["name", "description"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "Run timeout"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Zeitlimit"
+        }
+      ],
+      "description": [
+        {
+          "language_code": "en_us",
+          "string": "Maximum time in seconds to wait for the script to finish. If this time is exceeded the script is aborted."
+        },
+        {
+          "language_code": "de_de",
+          "string": "Maximale Zeit in Sekunden, die auf den Abschluss des Skripts gewartet werden soll. Bei Überschreitung dieser Zeit wird das Skript abgebrochen."
+        }
+      ]
+    },
+    {
+      "function": "WATCH",
+      "type": {
+        "dataType": "array",
+        "elements": [
+          {
+            "elementType": "select",
+            "elementOptions": [{ "multiple": "true" }],
+            "transformers": []
+          }
+        ]
+      },
+      "default_value": ["Watched_Value1", "Watched_Value4"],
+      "options": [
+        "Watched_Value1",
+        "Watched_Value2",
+        "Watched_Value3",
+        "Watched_Value4"
+      ],
+      "localized": ["name", "description"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "Watched"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Überwacht"
+        }
+      ],
+      "description": [
+        {
+          "language_code": "en_us",
+          "string": "Send a notification if selected values change. Use <code>CTRL + Click</code> to select/deselect. <ul> <li><code>Watched_Value1</code> is Active </li><li><code>Watched_Value2</code> is Hostname </li><li><code>Watched_Value3</code> is hardware </li><li><code>Watched_Value4</code> is State </li></ul>"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Sende eine Benachrichtigung, wenn ein ausgwählter Wert sich ändert. <code>STRG + klicken</code> zum aus-/abwählen. <ul> <li><code>Watched_Value1</code> ist der Aktivstatus</li><li><code>Watched_Value2</code> ist der Hostname</li><li><code>Watched_Value3</code> ist die Hardware</li><li><code>Watched_Value4</code> ist der Zustand </li></ul>"
+        }
+      ]
+    },
+    {
+      "function": "REPORT_ON",
+      "type": {
+        "dataType": "array",
+        "elements": [
+          {
+            "elementType": "select",
+            "elementOptions": [{ "multiple": "true" }],
+            "transformers": []
+          }
+        ]
+      },
+      "default_value": ["new", "watched-changed"],
+      "options": [
+        "new",
+        "watched-changed",
+        "watched-not-changed",
+        "missing-in-last-scan"
+      ],
+      "localized": ["name", "description"],
+      "name": [
+        {
+          "language_code": "en_us",
+          "string": "Report on"
+        },
+        {
+          "language_code": "de_de",
+          "string": "Benachrichtige wenn"
+        }
+      ],
+      "description": [
+        {
+          "language_code": "en_us",
+          "string": "Send a notification only on these statuses. <code>new</code> means a new unique (unique combination of PrimaryId and SecondaryId) object was discovered. <code>watched-changed</code> means that selected <code>Watched_ValueN</code> columns changed."
+        },
+        {
+          "language_code": "de_de",
+          "string": "Benachrichtige nur bei diesen Status. <code>new</code> bedeutet ein neues eindeutiges (einzigartige Kombination aus PrimaryId und SecondaryId) Objekt wurde erkennt. <code>watched-changed</code> bedeutet eine ausgewählte <code>Watched_ValueN</code>-Spalte hat sich geändert."
+        }
+      ]
+    }
+  ]
+}
